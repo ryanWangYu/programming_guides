@@ -3,7 +3,7 @@ Android Custom View
 
 Custom SeekBar
 ----------------
-  When using custom images for progressDrawable, set layout_height, minHeight and maxHeight to the intrinsic height of the image. (divide by density)
+  When using custom images for progressDrawable, set layout_height, minHeight and maxHeight to the intrinsic height of the thumb image. (divide by density)
 
 Custom RatingBar
 ------------------
