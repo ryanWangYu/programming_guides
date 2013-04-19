@@ -19,7 +19,7 @@ Drawables
 Values
 ------
 
-There's no rules of naming in this directory. The best practice is use different files
+There is no rules of naming in this directory. The best practice is use different files
 to store different types of values. For example:
 
 + dimens		-- store margin/padding values in dp unit
@@ -32,3 +32,18 @@ to store different types of values. For example:
 + booleans 		-- boolean values
 + styles		-- custom view element styles to override android default styles
 + theme			-- application-wide UI theme to override android default themes
+
+Raw
+---
+
+The directory is res/raw/
+
+Static files that are to be saved to the app at compile time should be saved here. Then, use Resources#openRawResource() with id R.raw.whatever to fetch the data. the method returns a InputStream object.
+
+Assets
+------
+
+The directory is assets/
+*NOTE* assets/ is at the same level as res/
+
+AssetManager provides a low-level way to handle raw files, e.g. audio, video.
