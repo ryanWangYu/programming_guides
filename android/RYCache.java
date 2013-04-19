@@ -1,12 +1,16 @@
 package com.example.remotedownloadandcache;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.v4.util.LruCache;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class RYCache {
     private MemCache mMemCache;
+    private FileCache mFileCache;
     
     private int MEM_CACHE_SIZE = 10 *1024 * 1024;   //10mb
     
@@ -14,28 +18,41 @@ public class RYCache {
         mMemCache = new MemCache(MEM_CACHE_SIZE);
     }
     
-    public void readCacheAsync(String key, CacheEventListener listener) {
+    public void readTextCacheAsync(String key, CacheEventListener listener) {
         if (listener != null) {
             Object value = mMemCache.get(key);
             if (value != null) {
-                listener.onReadCachedObjectsFinished(value);
+//                listener.onReadCachedObjectsFinished(value);
             } else {
                 
             }
         }
     }
     
-    public void writeObjectToCacheAsync(String key, Object value, CacheEventListener listener) {
+    public void readParcelableCacheAsync(String key, CacheEventListener listener) {
+        if (listener != null) {
+            
+        }
+    }
+    
+    public void writeTextToCacheAsync(String key, CharSequence text, CacheEventListener listener) {
+        
+    }
+    
+    public void writeParcelableToCacheAsync(String key, Parcelable parcelable, CacheEventListener listener) {
+        
+    }
+    
+    private void moveDataFromMemToFile(String key, Object data) {
+        
+    }
+    
+    private void moveDataFromFiletoMem(String key, Object data) {
         
     }
     
     public static interface CacheEventListener {
         
-        public void onReadCachedObjectsFinished(Object obj);
-        public void onReadCachedObjectsFailed();
-        
-        public void onWriteObjectToCacheFinished();
-        public void onWriteObjectToCacheFailed();
     }
     
     /**
@@ -48,21 +65,6 @@ public class RYCache {
      */
     public static class SimpleCacheEventListener implements CacheEventListener {
 
-        @Override
-        public void onReadCachedObjectsFinished(Object obj) {            
-        }
-
-        @Override
-        public void onReadCachedObjectsFailed() {            
-        }
-
-        @Override
-        public void onWriteObjectToCacheFinished() {            
-        }
-
-        @Override
-        public void onWriteObjectToCacheFailed() {            
-        }
     }
     
     /**
@@ -84,12 +86,29 @@ public class RYCache {
      */
     private static class FileCache {
         
+        private static int BUF_SIZE = 1024;
+        
+        private Context mContext;
         private File mCacheDir;
-        
-        private int FILE_CACHE_SIZE = 20 * 1024 * 1024; // 20m
-        
+                
         public FileCache(Context context) {
+            mContext = context;
             mCacheDir = context.getCacheDir();
+        }
+        
+        public CharSequence getText(String key) {
+            File file = new File(mCacheDir, key);
+            CharSequence text = null;
+//            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//                
+//            }
+            
+            return text;
+        }
+        
+        public void putText(String key, CharSequence text, int ttl) {
+//            BufferedOutputStream bos = new BufferedOutputStream(mContext.openFileOutput(key, Context.MODE_PRIVATE), BUF_SIZE);
+            
         }
     }
     
